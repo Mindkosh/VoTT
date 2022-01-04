@@ -284,6 +284,8 @@ export class AssetService {
                 boundingBox: {
                     left: objectArray.xminArray[index] * objectArray.width,
                     top: objectArray.yminArray[index] * objectArray.height,
+                    naturalWidth: (objectArray.xmaxArray[index] - objectArray.xminArray[index]) * objectArray.width,
+                    naturalHeight: (objectArray.ymaxArray[index] - objectArray.yminArray[index]) * objectArray.height,
                     width: (objectArray.xmaxArray[index] - objectArray.xminArray[index]) * objectArray.width,
                     height: (objectArray.ymaxArray[index] - objectArray.yminArray[index]) * objectArray.height,
                 },

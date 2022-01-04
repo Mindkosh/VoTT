@@ -8,7 +8,7 @@ import EditorPage, { IEditorPageProps, IEditorPageState } from "./editorPage";
 import MockFactory from "../../../../common/mockFactory";
 import {
     IApplicationState, IAssetMetadata, IProject,
-    EditorMode, IAsset, AssetState, ISize, IActiveLearningSettings, ModelPathType,
+    EditorMode, IAsset, AssetState, ISize
 } from "../../../../models/applicationState";
 import { AssetProviderFactory } from "../../../../providers/storage/assetProviderFactory";
 import createReduxStore from "../../../../redux/store/store";
@@ -33,7 +33,6 @@ import registerMixins from "../../../../registerMixins";
 import { TagInput } from "../../common/tagInput/tagInput";
 import { EditorToolbar } from "./editorToolbar";
 import { ToolbarItem } from "../../toolbar/toolbarItem";
-import { ActiveLearningService } from "../../../../services/activeLearningService";
 
 function createComponent(store, props: IEditorPageProps): ReactWrapper<IEditorPageProps, IEditorPageState, EditorPage> {
     return mount(
@@ -801,71 +800,7 @@ describe("Editor Page Component", () => {
         });
     });
 
-    describe("Active Learning", async () => {
-        let wrapper: ReactWrapper;
-        let editorPage: ReactWrapper<IEditorPageProps, IEditorPageState>;
-        const activeLearningMock = ActiveLearningService as jest.Mocked<typeof ActiveLearningService>;
-
-        async function beforeActiveLearningTest(activeLearningSettings?: IActiveLearningSettings) {
-            document.querySelector = MockFactory.mockCanvas();
-            activeLearningMock.prototype.isModelLoaded = jest.fn(() => true);
-            activeLearningMock.prototype.predictRegions = jest.fn((canvas, assetMetadtata) => {
-                return Promise.resolve({
-                    ...assetMetadtata,
-                    predicted: true,
-                });
-            });
-            const project = MockFactory.createTestProject();
-
-            if (activeLearningSettings) {
-                project.activeLearningSettings = activeLearningSettings;
-            }
-
-            const store = createReduxStore({
-                ...MockFactory.initialState(),
-                currentProject: project,
-            });
-
-            wrapper = createComponent(store, MockFactory.editorPageProps());
-            await waitForSelectedAsset(wrapper);
-            wrapper.update();
-            editorPage = wrapper.find(EditorPage).childAt(0);
-        }
-
-        it("predicts regions when auto detect has been enabled", async () => {
-            const activeLearningSettings: IActiveLearningSettings = {
-                modelPathType: ModelPathType.Coco,
-                autoDetect: true,
-                predictTag: true,
-            };
-
-            await beforeActiveLearningTest(activeLearningSettings);
-
-            editorPage.find(Canvas).props().onCanvasRendered(document.createElement("canvas"));
-            expect(activeLearningMock.prototype.predictRegions).toBeCalled();
-        });
-
-        it("predicts regions when toolbar item is selected", async () => {
-            await beforeActiveLearningTest();
-
-            const toolbarItem = {
-                props: {
-                    name: ToolbarItemName.ActiveLearning,
-                },
-            };
-
-            const selectedAsset = editorPage.state().selectedAsset;
-            wrapper.find(EditorToolbar).props().onToolbarItemSelected(toolbarItem as ToolbarItem);
-
-            await MockFactory.flushUi();
-
-            expect(activeLearningMock.prototype.predictRegions).toBeCalledWith(expect.anything(), selectedAsset);
-            expect(assetServiceMock.prototype.save).toBeCalledWith({
-                ...selectedAsset,
-                predicted: true,
-            });
-        });
-    });
+    
 });
 
 function createStore(project: IProject, setCurrentProject: boolean = false): Store<any, AnyAction> {

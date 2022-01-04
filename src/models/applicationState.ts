@@ -220,7 +220,7 @@ export enum ModelPathType {
  * @member activeLearningSettings - Active Learning settings
  */
 export interface IAdditionalPageSettings extends IAssetPreviewSettings {
-    activeLearningSettings: IActiveLearningSettings;
+    // activeLearningSettings: IActiveLearningSettings;
 }
 
 /**
@@ -326,6 +326,8 @@ export interface IRegion {
 export interface IBoundingBox {
     left: number;
     top: number;
+    naturalHeight: number;
+    naturalWidth: number;
     width: number;
     height: number;
 }

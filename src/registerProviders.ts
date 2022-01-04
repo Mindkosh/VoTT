@@ -11,7 +11,7 @@ import { StorageProviderFactory } from "./providers/storage/storageProviderFacto
 import registerToolbar from "./registerToolbar";
 import { strings } from "./common/strings";
 import { HostProcessType } from "./common/hostProcess";
-import { AzureCustomVisionProvider } from "./providers/export/azureCustomVision";
+// import { AzureCustomVisionProvider } from "./providers/export/azureCustomVision";
 import { CntkExportProvider } from "./providers/export/cntk";
 
 /**
@@ -65,11 +65,11 @@ export default function registerProviders() {
         displayName: strings.export.providers.tfRecords.displayName,
         factory: (project, options) => new TFRecordsExportProvider(project, options),
     });
-    ExportProviderFactory.register({
-        name: "azureCustomVision",
-        displayName: strings.export.providers.azureCV.displayName,
-        factory: (project, options) => new AzureCustomVisionProvider(project, options),
-    });
+    // ExportProviderFactory.register({
+    //     name: "azureCustomVision",
+    //     displayName: strings.export.providers.azureCV.displayName,
+    //     factory: (project, options) => new AzureCustomVisionProvider(project, options),
+    // });
     ExportProviderFactory.register({
         name: "cntk",
         displayName: strings.export.providers.cntk.displayName,

@@ -46,6 +46,8 @@ describe("Canvas Helpers", () => {
             boundingBox: {
                 left: 0,
                 top: 0,
+                naturalWidth: 100,
+                naturalHeight: 100,
                 width: 100,
                 height: 100,
             },
@@ -80,6 +82,8 @@ describe("Canvas Helpers", () => {
         const boundingBox = {
             left: 0,
             top: 0,
+            naturalWidth: 100,
+            naturalHeight: 100,
             width: 100,
             height: 100,
         };
@@ -125,9 +129,13 @@ describe("Canvas Helpers", () => {
 
     function expectDefaultDuplication(left, top, width = 100, height = 100) {
         const regions = MockFactory.createTestRegions();
+        const naturalWidth = 100;
+        const naturalHeight = 100;
         const boundingBox: IBoundingBox = {
             left,
             top,
+            naturalWidth,
+            naturalHeight,
             width,
             height,
         };

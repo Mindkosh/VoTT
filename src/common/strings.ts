@@ -1,10 +1,5 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
 import { english } from "./localization/en-us";
-import { spanish } from "./localization/es-cl";
-import { japanese } from "./localization/ja";
-import { chinesetw } from "./localization/zh-tw";
-import { korean } from "./localization/ko-kr";
-import { chinese } from "./localization/zh-ch";
 
 /**
  * Interface for all required strings in application
@@ -355,65 +350,65 @@ export interface IAppStrings {
             vottJson: {
                 displayName: string,
             },
-            azureCV: {
-                displayName: string,
-                regions: {
-                    eastUs: string,
-                    eastUs2: string,
-                    northCentralUs: string,
-                    southCentralUs: string,
-                    westUs2: string,
-                    westEurope: string,
-                    northEurope: string,
-                    southeastAsia: string,
-                    australiaEast: string,
-                    centralIndia: string,
-                    ukSouth: string,
-                    japanEast: string,
-                },
-                properties: {
-                    apiKey: {
-                        title: string,
-                    },
-                    region: {
-                        title: string,
-                        description: string,
-                    },
-                    newOrExisting: {
-                        title: string,
-                        options: {
-                            new: string,
-                            existing: string,
-                        },
-                    },
-                    name: {
-                        title: string,
-                    },
-                    description: {
-                        title: string,
-                    },
-                    projectType: {
-                        title: string,
-                        options: {
-                            classification: string,
-                            objectDetection: string,
-                        },
-                    },
-                    classificationType: {
-                        title: string,
-                        options: {
-                            multiLabel: string,
-                            multiClass: string,
-                        },
-                    },
-                    domainId: {
-                        title: string,
-                    },
-                    projectId: {
-                        title: string,
-                    },
-                },
-            },
+            // azureCV: {
+            //     displayName: string,
+            //     regions: {
+            //         eastUs: string,
+            //         eastUs2: string,
+            //         northCentralUs: string,
+            //         southCentralUs: string,
+            //         westUs2: string,
+            //         westEurope: string,
+            //         northEurope: string,
+            //         southeastAsia: string,
+            //         australiaEast: string,
+            //         centralIndia: string,
+            //         ukSouth: string,
+            //         japanEast: string,
+            //     },
+            //     properties: {
+            //         apiKey: {
+            //             title: string,
+            //         },
+            //         region: {
+            //             title: string,
+            //             description: string,
+            //         },
+            //         newOrExisting: {
+            //             title: string,
+            //             options: {
+            //                 new: string,
+            //                 existing: string,
+            //             },
+            //         },
+            //         name: {
+            //             title: string,
+            //         },
+            //         description: {
+            //             title: string,
+            //         },
+            //         projectType: {
+            //             title: string,
+            //             options: {
+            //                 classification: string,
+            //                 objectDetection: string,
+            //             },
+            //         },
+            //         classificationType: {
+            //             title: string,
+            //             options: {
+            //                 multiLabel: string,
+            //                 multiClass: string,
+            //             },
+            //         },
+            //         domainId: {
+            //             title: string,
+            //         },
+            //         projectId: {
+            //             title: string,
+            //         },
+            //     },
+            // },
             tfRecords: {
                 displayName: string,
             },
@@ -501,11 +496,7 @@ interface IStrings extends LocalizedStringsMethods, IAppStrings { }
 export const strings: IStrings = new LocalizedStrings({
     // TODO: Need to comment out other languages which will not be used
     en: english,
-    es: spanish,
-    ja: japanese,
-    tw: chinesetw,
-    ko: korean,
-    ch: chinese,
+
 });
 
 /**

@@ -231,6 +231,8 @@ export default class ImportService implements IImportService {
                 boundingBox: {
                     height: (region.y2 - region.y1),
                     width: (region.x2 - region.x1),
+                    naturalHeight: (region.y2 - region.y1),
+                    naturalWidth: (region.x2 - region.x1),
                     left: region.x1,
                     top: region.y1,
                 },

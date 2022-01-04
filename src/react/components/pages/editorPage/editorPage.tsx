@@ -29,8 +29,7 @@ import EditorSideBar from "./editorSideBar";
 import { EditorToolbar } from "./editorToolbar";
 import Alert from "../../common/alert/alert";
 import Confirm from "../../common/confirm/confirm";
-import { ActiveLearningService } from "../../../../services/activeLearningService";
-import { toast } from "react-toastify";
+// import { ActiveLearningService } from "../../../../services/activeLearningService";
 
 /**
  * Properties for Editor Page
@@ -110,14 +109,14 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         editorMode: EditorMode.Rectangle,
         additionalSettings: {
             videoSettings: (this.props.project) ? this.props.project.videoSettings : null,
-            activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null,
+            // activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null,
         },
         thumbnailSize: this.props.appSettings.thumbnailSize || { width: 175, height: 155 },
         isValid: true,
         showInvalidRegionWarning: false,
     };
 
-    private activeLearningService: ActiveLearningService = null;
+    // private activeLearningService: ActiveLearningService = null;
     private loadingProjectAssets: boolean = false;
     private toolbarItems: IToolbarItemRegistration[] = ToolbarItemFactory.getToolbarItems();
     private canvas: RefObject<Canvas> = React.createRef();
@@ -133,7 +132,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             await this.props.actions.loadProject(project);
         }
 
-        this.activeLearningService = new ActiveLearningService(this.props.project.activeLearningSettings);
+        // this.activeLearningService = new ActiveLearningService(this.props.project.activeLearningSettings);
     }
 
     public async componentDidUpdate(prevProps: Readonly<IEditorPageProps>) {
@@ -148,7 +147,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             this.setState({
                 additionalSettings: {
                     videoSettings: (this.props.project) ? this.props.project.videoSettings : null,
-                    activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null,
+                    // activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null,
                 },
             });
         }
@@ -211,7 +210,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
                                     actions={this.props.actions}
                                     onToolbarItemSelected={this.onToolbarItemSelected} />
                             </div>
-                            <div className="editor-page-content-main-body">
+                            <div className="editor-page-content-main-body" style={{ overflow: "scroll" }}>
                                 {selectedAsset &&
                                     <Canvas
                                         ref={this.canvas}
@@ -492,9 +491,10 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
     private onCanvasRendered = async (canvas: HTMLCanvasElement) => {
         // When active learning auto-detect is enabled
         // run predictions when asset changes
-        if (this.props.project.activeLearningSettings.autoDetect && !this.state.selectedAsset.asset.predicted) {
-            await this.predictRegions(canvas);
-        }
+        // if (this.props.project.activeLearningSettings.autoDetect && !this.state.selectedAsset.asset.predicted) {
+        //     await this.predictRegions(canvas);
+        // }
+        return;
     }
 
     private onSelectedRegionsChanged = (selectedRegions: IRegion[]) => {
@@ -558,43 +558,43 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             case ToolbarItemName.RemoveAllRegions:
                 this.canvas.current.confirmRemoveAllRegions();
                 break;
-            case ToolbarItemName.ActiveLearning:
-                await this.predictRegions();
-                break;
+            // case ToolbarItemName.ActiveLearning:
+            //     await this.predictRegions();
+            //     break;
         }
     }
 
-    private predictRegions = async (canvas?: HTMLCanvasElement) => {
-        canvas = canvas || document.querySelector("canvas");
-        if (!canvas) {
-            return;
-        }
+    // private predictRegions = async (canvas?: HTMLCanvasElement) => {
+    //     canvas = canvas || document.querySelector("canvas");
+    //     if (!canvas) {
+    //         return;
+    //     }
 
-        // Load the configured ML model
-        if (!this.activeLearningService.isModelLoaded()) {
-            let toastId: number = null;
-            try {
-                toastId = toast.info(strings.activeLearning.messages.loadingModel, { autoClose: false });
-                await this.activeLearningService.ensureModelLoaded();
-            } catch (e) {
-                toast.error(strings.activeLearning.messages.errorLoadModel);
-                return;
-            } finally {
-                toast.dismiss(toastId);
-            }
-        }
+    //     // Load the configured ML model
+    //     if (!this.activeLearningService.isModelLoaded()) {
+    //         let toastId: number = null;
+    //         try {
+    //             toastId = toast.info(strings.activeLearning.messages.loadingModel, { autoClose: false });
+    //             await this.activeLearningService.ensureModelLoaded();
+    //         } catch (e) {
+    //             toast.error(strings.activeLearning.messages.errorLoadModel);
+    //             return;
+    //         } finally {
+    //             toast.dismiss(toastId);
+    //         }
+    //     }
 
-        // Predict and add regions to current asset
-        try {
-            const updatedAssetMetadata = await this.activeLearningService
-                .predictRegions(canvas, this.state.selectedAsset);
+    //     // Predict and add regions to current asset
+    //     try {
+    //         const updatedAssetMetadata = await this.activeLearningService
+    //             .predictRegions(canvas, this.state.selectedAsset);
 
-            await this.onAssetMetadataChanged(updatedAssetMetadata);
-            this.setState({ selectedAsset: updatedAssetMetadata });
-        } catch (e) {
-            throw new AppError(ErrorCode.ActiveLearningPredictionError, "Error predicting regions");
-        }
-    }
+    //         await this.onAssetMetadataChanged(updatedAssetMetadata);
+    //         this.setState({ selectedAsset: updatedAssetMetadata });
+    //     } catch (e) {
+    //         throw new AppError(ErrorCode.ActiveLearningPredictionError, "Error predicting regions");
+    //     }
+    // }
 
     /**
      * Navigates to the previous / next root asset on the sidebar

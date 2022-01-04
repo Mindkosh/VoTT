@@ -85,6 +85,8 @@ describe("CSV Format Export Provider", () => {
                             boundingBox: {
                                 left: 1,
                                 top: 2,
+                                naturalWidth: 3,
+                                naturalHeight: 4,
                                 width: 3,
                                 height: 4,
                             },

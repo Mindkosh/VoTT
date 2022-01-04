@@ -3,7 +3,7 @@ import shortid from "shortid";
 import { StorageProviderFactory } from "../providers/storage/storageProviderFactory";
 import {
     IProject, ISecurityToken, AppError,
-    ErrorCode, ModelPathType, IActiveLearningSettings,
+    ErrorCode
 } from "../models/applicationState";
 import Guard from "../common/guard";
 import { constants } from "../common/constants";
@@ -25,11 +25,11 @@ export interface IProjectService {
     isDuplicate(project: IProject, projectList: IProject[]): boolean;
 }
 
-const defaultActiveLearningSettings: IActiveLearningSettings = {
-    autoDetect: false,
-    predictTag: true,
-    modelPathType: ModelPathType.Coco,
-};
+// const defaultActiveLearningSettings: IActiveLearningSettings = {
+//     autoDetect: false,
+//     predictTag: true,
+//     modelPathType: ModelPathType.Coco,
+// };
 
 const defaultExportOptions: IExportFormat = {
     providerType: "vottJson",
@@ -63,9 +63,9 @@ export default class ProjectService implements IProjectService {
             }
 
             // Initialize active learning settings if they don't exist
-            if (!loadedProject.activeLearningSettings) {
-                loadedProject.activeLearningSettings = defaultActiveLearningSettings;
-            }
+            // if (!loadedProject.activeLearningSettings) {
+            //     loadedProject.activeLearningSettings = defaultActiveLearningSettings;
+            // }
 
             // Initialize export settings if they don't exist
             if (!loadedProject.exportFormat) {
@@ -99,9 +99,9 @@ export default class ProjectService implements IProjectService {
         }
 
         // Initialize active learning settings if they don't exist
-        if (!project.activeLearningSettings) {
-            project.activeLearningSettings = defaultActiveLearningSettings;
-        }
+        // if (!project.activeLearningSettings) {
+        //     project.activeLearningSettings = defaultActiveLearningSettings;
+        // }
 
         // Initialize export settings if they don't exist
         if (!project.exportFormat) {

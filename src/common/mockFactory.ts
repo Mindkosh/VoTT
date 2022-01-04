@@ -18,9 +18,9 @@ import { IProjectService } from "../services/projectService";
 import Canvas, { ICanvasProps } from "../react/components/pages/editorPage/canvas";
 import { IBingImageSearchOptions, BingImageSearchAspectRatio } from "../providers/storage/bingImageSearch";
 import { IEditorPageProps } from "../react/components/pages/editorPage/editorPage";
-import {
-    IAzureCustomVisionTag, IAzureCustomVisionRegion,
-} from "../providers/export/azureCustomVision/azureCustomVisionService";
+// import {
+//     IAzureCustomVisionTag, IAzureCustomVisionRegion,
+// } from "../providers/export/azureCustomVision/azureCustomVisionService";
 import IApplicationActions, * as applicationActions from "../redux/actions/applicationActions";
 import { ILocalFileSystemProxyOptions } from "../providers/storage/localFileSystemProxy";
 import { generateKey } from "./crypto";
@@ -33,7 +33,7 @@ import { SelectionMode } from "vott-ct/lib/js/CanvasTools/Interface/ISelectorSet
 import { IKeyboardBindingProps } from "../react/components/common/keyboardBinding/keyboardBinding";
 import { KeyEventType } from "../react/components/common/keyboardManager/keyboardManager";
 import { IKeyboardRegistrations } from "../react/components/common/keyboardManager/keyboardRegistrationManager";
-import { IActiveLearningPageProps } from "../react/components/pages/activeLearning/activeLearningPage";
+// import { IActiveLearningPageProps } from "../react/components/pages/activeLearning/activeLearningPage";
 
 export default class MockFactory {
 
@@ -752,6 +752,8 @@ export default class MockFactory {
             boundingBox: {
                 left: origin.x,
                 top: origin.y,
+                naturalHeight: size.height,
+                naturalWidth: size.width,
                 width: size.width,
                 height: size.height,
             },
@@ -900,16 +902,16 @@ export default class MockFactory {
      * Creates fake IActiveLearningPageProps
      * @param projectId Current project ID
      */
-    public static activeLearningProps(projectId?: string): IActiveLearningPageProps {
-        return {
-            actions: (projectActions as any) as IProjectActions,
-            history: MockFactory.history(),
-            location: MockFactory.location(),
-            match: MockFactory.match(projectId, "active-learning"),
-            project: null,
-            recentProjects: MockFactory.createTestProjects(),
-        };
-    }
+    // public static activeLearningProps(projectId?: string): IActiveLearningPageProps {
+    //     return {
+    //         actions: (projectActions as any) as IProjectActions,
+    //         history: MockFactory.history(),
+    //         location: MockFactory.location(),
+    //         match: MockFactory.match(projectId, "active-learning"),
+    //         project: null,
+    //         recentProjects: MockFactory.createTestProjects(),
+    //     };
+    // }
 
     /**
      * Creates fake IEditorPageProps
@@ -973,43 +975,43 @@ export default class MockFactory {
         });
     }
 
-    public static createAzureCustomVisionTags(count: number = 10): IAzureCustomVisionTag[] {
-        const tags: IAzureCustomVisionTag[] = [];
-        for (let i = 1; i <= count; i++) {
-            tags.push(MockFactory.createAzureCustomVisionTag(`Tag ${i}`));
-        }
+    // public static createAzureCustomVisionTags(count: number = 10): IAzureCustomVisionTag[] {
+    //     const tags: IAzureCustomVisionTag[] = [];
+    //     for (let i = 1; i <= count; i++) {
+    //         tags.push(MockFactory.createAzureCustomVisionTag(`Tag ${i}`));
+    //     }
 
-        return tags;
-    }
+    //     return tags;
+    // }
 
-    public static createAzureCustomVisionTag(name: string): IAzureCustomVisionTag {
-        return {
-            id: shortid.generate(),
-            name,
-            description: `Description for ${name}`,
-            imageCount: 0,
-        };
-    }
+    // public static createAzureCustomVisionTag(name: string): IAzureCustomVisionTag {
+    //     return {
+    //         id: shortid.generate(),
+    //         name,
+    //         description: `Description for ${name}`,
+    //         imageCount: 0,
+    //     };
+    // }
 
-    public static createAzureCustomVisionRegions(count: number = 10): IAzureCustomVisionRegion[] {
-        const regions: IAzureCustomVisionRegion[] = [];
-        for (let i = 1; i <= count; i++) {
-            regions.push(MockFactory.createAzureCustomVisionRegion());
-        }
+    // public static createAzureCustomVisionRegions(count: number = 10): IAzureCustomVisionRegion[] {
+    //     const regions: IAzureCustomVisionRegion[] = [];
+    //     for (let i = 1; i <= count; i++) {
+    //         regions.push(MockFactory.createAzureCustomVisionRegion());
+    //     }
 
-        return regions;
-    }
+    //     return regions;
+    // }
 
-    public static createAzureCustomVisionRegion(): IAzureCustomVisionRegion {
-        return {
-            imageId: shortid.generate(),
-            tagId: shortid.generate(),
-            left: 0,
-            top: 0,
-            width: 1,
-            height: 1,
-        };
-    }
+    // public static createAzureCustomVisionRegion(): IAzureCustomVisionRegion {
+    //     return {
+    //         imageId: shortid.generate(),
+    //         tagId: shortid.generate(),
+    //         left: 0,
+    //         top: 0,
+    //         width: 1,
+    //         height: 1,
+    //     };
+    // }
 
     public static createKeyboardRegistrations(count = 5, handlers?): IKeyboardRegistrations {
         const keyDownRegs = {};

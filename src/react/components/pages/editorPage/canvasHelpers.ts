@@ -115,6 +115,8 @@ export default class CanvasHelpers {
             boundingBox: {
                 left: regionData.x,
                 top: regionData.y,
+                naturalWidth: regionData.width,
+                naturalHeight: regionData.height,
                 width: regionData.width,
                 height: regionData.height,
             },

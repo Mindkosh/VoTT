@@ -4,7 +4,7 @@ import MockFactory from "../common/mockFactory";
 import { StorageProviderFactory } from "../providers/storage/storageProviderFactory";
 import {
     IProject, IExportFormat, ISecurityToken,
-    AssetState, IActiveLearningSettings, ModelPathType,
+    AssetState
 } from "../models/applicationState";
 import { constants } from "../common/constants";
 import { ExportProviderFactory } from "../providers/export/exportProviderFactory";
@@ -123,18 +123,7 @@ describe("Project Service", () => {
         expect(decryptedProject.exportFormat).toEqual(expectedExportFormat);
     });
 
-    it("sets default active learning setting when not defined", async () => {
-        testProject.activeLearningSettings = null;
-        const result = await projectService.save(testProject, securityToken);
 
-        const activeLearningSettings: IActiveLearningSettings = {
-            autoDetect: false,
-            predictTag: true,
-            modelPathType: ModelPathType.Coco,
-        };
-
-        expect(result.activeLearningSettings).toEqual(activeLearningSettings);
-    });
 
     it("initializes tags to empty array if not defined", async () => {
         testProject.tags = null;
