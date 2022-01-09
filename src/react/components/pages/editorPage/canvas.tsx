@@ -472,19 +472,15 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
     }
 
     private handleKeypress = (event) => {
-        // if (!contentSource) {
-        //     return;
-        // }
         const boundingBox = createContentBoundingBox(this.state.contentSource);
         const canvas = this.canvasZone.current;
         switch(event.keyCode){
             case 107:
-                console.log(boundingBox.naturalWidth);
                 var new_width = Math.round( parseFloat(canvas.style.width) + 0.2*parseFloat(canvas.style.width) )
-                new_width = Math.max( boundingBox.naturalWidth, new_width )
+                new_width = Math.min( boundingBox.naturalWidth, new_width )
                 
                 var new_height = Math.round( parseFloat(canvas.style.height) + 0.2*parseFloat(canvas.style.height) )
-                new_height = Math.max( boundingBox.naturalHeight, new_height )
+                new_height = Math.min( boundingBox.naturalHeight, new_height )
 
                 canvas.style.width = `${new_width}px`;
                 canvas.style.height = `${new_height}px`;
@@ -494,10 +490,10 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
             
             case 109:
                 var new_width = Math.round( parseFloat(canvas.style.width) - 0.2*parseFloat(canvas.style.width) )
-                new_width = Math.min( boundingBox.width, new_width )
+                new_width = Math.max( boundingBox.width, new_width )
                 
                 var new_height = Math.round( parseFloat(canvas.style.height) - 0.2*parseFloat(canvas.style.height) )
-                new_height = Math.min( boundingBox.height, new_height )
+                new_height = Math.max( boundingBox.height, new_height )
 
                 canvas.style.width = `${new_width}px`;
                 canvas.style.height = `${new_height}px`;
