@@ -485,7 +485,6 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
                 canvas.style.width = `${new_width}px`;
                 canvas.style.height = `${new_height}px`;
                 this.editor.resize(new_width, new_height);
-                console.log(new_width);
                 break;
             
             case 109:

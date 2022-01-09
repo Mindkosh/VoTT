@@ -1,15 +1,16 @@
 {
     "name": "vott",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "author": {
-        "name": "Microsoft",
-        "url": "https://github.com/Microsoft/VoTT"
+        "name": "Shikhar",
+        "url": "https://github.com/Mindkosh/VoTT",
+        "email": "sdevgupta@mindkosh.com"
     },
     "description": "Visual Object Tagging Tool (VoTT) - an annotation and labeling tool for images and video.",
     "homepage": "https://github.com/Microsoft/VoTT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/VoTT.git"
+        "url": "https://github.com/Mindkosh/VoTTt"
     },
     "license": "MIT",
     "private": true,

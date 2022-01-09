@@ -17,8 +17,8 @@ win:
   icon: app-icons/icon.ico
 linux:
   target:
-    - snap
+    - zip
 publish: null
 electronVersion: 3.0.13
-extraFiles:
-  - "cocoSSDModel"
+# extraFiles:
+#   - "cocoSSDModel"
