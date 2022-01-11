@@ -3,7 +3,7 @@ import shortid from "shortid";
 import { StorageProviderFactory } from "../providers/storage/storageProviderFactory";
 import {
     IProject, ISecurityToken, AppError,
-    ErrorCode
+    ErrorCode,
 } from "../models/applicationState";
 import Guard from "../common/guard";
 import { constants } from "../common/constants";

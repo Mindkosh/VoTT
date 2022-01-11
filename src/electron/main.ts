@@ -107,18 +107,18 @@ function registerContextMenu(browserWindow: BrowserWindow): void {
             ],
         },
         { role: "editMenu" },
-        // {
-        //     label: "View", submenu: [
-        //         { role: "reload" },
-        //         { type: "separator" },
-        //         { role: "toggleDevTools" },
-        //         { role: "toggleFullScreen" },
-        //         { type: "separator" },
-        //         { role: "resetZoom" },
-        //         { role: "zoomIn" },
-        //         { role: "zoomOut" },
-        //     ],
-        // },
+        {
+            label: "View", submenu: [
+                { role: "reload" },
+                { type: "separator" },
+                { role: "toggleDevTools" },
+                { role: "toggleFullScreen" },
+                { type: "separator" },
+                { role: "resetZoom" },
+                { role: "zoomIn" },
+                { role: "zoomOut" },
+            ],
+        },
         { role: "windowMenu" },
     ];
     const menu = Menu.buildFromTemplate(menuItems);

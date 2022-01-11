@@ -4,7 +4,7 @@ import MockFactory from "../common/mockFactory";
 import { StorageProviderFactory } from "../providers/storage/storageProviderFactory";
 import {
     IProject, IExportFormat, ISecurityToken,
-    AssetState
+    AssetState,
 } from "../models/applicationState";
 import { constants } from "../common/constants";
 import { ExportProviderFactory } from "../providers/export/exportProviderFactory";
@@ -122,8 +122,6 @@ describe("Project Service", () => {
 
         expect(decryptedProject.exportFormat).toEqual(expectedExportFormat);
     });
-
-
 
     it("initializes tags to empty array if not defined", async () => {
         testProject.tags = null;

@@ -474,29 +474,30 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
     private handleKeypress = (event) => {
         const boundingBox = createContentBoundingBox(this.state.contentSource);
         const canvas = this.canvasZone.current;
-        switch(event.keyCode){
+        let newWidth = 0;
+        let newHeight = 0;
+        switch (event.keyCode) {
             case 107:
-                var new_width = Math.round( parseFloat(canvas.style.width) + 0.2*parseFloat(canvas.style.width) )
-                new_width = Math.min( boundingBox.naturalWidth, new_width )
-                
-                var new_height = Math.round( parseFloat(canvas.style.height) + 0.2*parseFloat(canvas.style.height) )
-                new_height = Math.min( boundingBox.naturalHeight, new_height )
+                newWidth = Math.round( parseFloat( canvas.style.width ) + ( 0.2 * parseFloat( canvas.style.width ) ));
+                newWidth = Math.min( boundingBox.naturalWidth, newWidth );
+                newHeight = Math.round( parseFloat( canvas.style.height ) + ( 0.2 * parseFloat( canvas.style.height )) );
+                newHeight = Math.min( boundingBox.naturalHeight, newHeight );
 
-                canvas.style.width = `${new_width}px`;
-                canvas.style.height = `${new_height}px`;
-                this.editor.resize(new_width, new_height);
+                canvas.style.width = `${newWidth}px`;
+                canvas.style.height = `${newHeight}px`;
+                this.editor.resize(newWidth, newHeight);
                 break;
-            
-            case 109:
-                var new_width = Math.round( parseFloat(canvas.style.width) - 0.2*parseFloat(canvas.style.width) )
-                new_width = Math.max( boundingBox.width, new_width )
                 
-                var new_height = Math.round( parseFloat(canvas.style.height) - 0.2*parseFloat(canvas.style.height) )
-                new_height = Math.max( boundingBox.height, new_height )
+            case 109:
+                newWidth = Math.round( parseFloat(canvas.style.width) - 0.2*parseFloat(canvas.style.width) );
+                newWidth = Math.max( boundingBox.width, newWidth );
+                
+                newHeight = Math.round( parseFloat(canvas.style.height) - 0.2*parseFloat(canvas.style.height) );
+                newHeight = Math.max( boundingBox.height, newHeight );
 
-                canvas.style.width = `${new_width}px`;
-                canvas.style.height = `${new_height}px`;
-                this.editor.resize(new_width, new_height);
+                canvas.style.width = `${newWidth}px`;
+                canvas.style.height = `${newHeight}px`;
+                this.editor.resize(newWidth, newHeight);
                 break;
             
         }

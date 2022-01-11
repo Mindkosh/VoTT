@@ -8,7 +8,7 @@ import EditorPage, { IEditorPageProps, IEditorPageState } from "./editorPage";
 import MockFactory from "../../../../common/mockFactory";
 import {
     IApplicationState, IAssetMetadata, IProject,
-    EditorMode, IAsset, AssetState, ISize
+    EditorMode, IAsset, AssetState, ISize,
 } from "../../../../models/applicationState";
 import { AssetProviderFactory } from "../../../../providers/storage/assetProviderFactory";
 import createReduxStore from "../../../../redux/store/store";
@@ -798,9 +798,7 @@ describe("Editor Page Component", () => {
                 },
             }));
         });
-    });
-
-    
+    }); 
 });
 
 function createStore(project: IProject, setCurrentProject: boolean = false): Store<any, AnyAction> {

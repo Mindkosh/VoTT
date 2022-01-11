@@ -124,6 +124,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
     private deleteTagConfirm: React.RefObject<Confirm> = React.createRef();
 
     public async componentDidMount() {
+        console.log("mounted");
         const projectId = this.props.match.params["projectId"];
         if (this.props.project) {
             await this.loadProjectAssets();
@@ -161,7 +162,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         const { project } = this.props;
         const { assets, selectedAsset } = this.state;
         const rootAssets = assets.filter((asset) => !asset.parent);
-
+        console.log("rendering");
         if (!project) {
             return (<div>Loading...</div>);
         }
