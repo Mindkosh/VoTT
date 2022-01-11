@@ -1,5 +1,4 @@
-import { randomIntInRange, createQueryString, encryptProject,
-    decryptProject, normalizeSlashes, encodeFileURI } from "./utils";
+import { randomIntInRange, createQueryString, normalizeSlashes, encodeFileURI } from "./utils";
 import MockFactory from "./mockFactory";
 
 describe("Helper functions", () => {
@@ -65,24 +64,6 @@ describe("Helper functions", () => {
                 .toEqual(
                     "a=1&b=A%20string%20with%20a%20space&c=A%20string%20with%20a%20%23%20and%20a%20%26%20char&d=true",
                 );
-        });
-    });
-
-    describe("Encryption Utils", () => {
-        const testProject = MockFactory.createTestProject("TestProject");
-        const securityToken = MockFactory.createSecurityToken("TestProject");
-
-        it("encrypt project does not double encrypt project", () => {
-            const encryptedProject = encryptProject(testProject, securityToken);
-            const doubleEncryptedProject = encryptProject(encryptedProject, securityToken);
-
-            expect(encryptedProject).toEqual(doubleEncryptedProject);
-        });
-
-        it("decrypt project does not attempt to decrypt already decrtyped data", () => {
-            const decryptedProject = decryptProject(testProject, securityToken);
-
-            expect(decryptedProject).toEqual(testProject);
         });
     });
 });

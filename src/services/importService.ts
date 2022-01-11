@@ -2,7 +2,7 @@ import shortid from "shortid";
 import {
     IProject, ITag, IConnection, AppError, ErrorCode,
     IAssetMetadata, IRegion, RegionType, AssetState, IFileInfo,
-    IAsset, AssetType, ModelPathType,
+    IAsset, AssetType,
 } from "../models/applicationState";
 import { IV1Project, IV1Region } from "../models/v1Models";
 import packageJson from "../../package.json";
@@ -57,8 +57,8 @@ export default class ImportService implements IImportService {
             id: shortid.generate(),
             name: projectInfo.file.name.split(".")[0],
             version: packageJson.version,
-            useSecurityToken: true,
-            securityToken: `${projectInfo.file.name.split(".")[0]} Token`,
+            // useSecurityToken: true,
+            // securityToken: `${projectInfo.file.name.split(".")[0]} Token`,
             description: "Converted V1 Project",
             tags: parsedTags,
             sourceConnection: connection,
@@ -67,7 +67,6 @@ export default class ImportService implements IImportService {
             videoSettings: {
                 frameExtractionRate: originalProject.framerate ? Number(originalProject.framerate) : 15,
             },
-            activeLearningSettings: null,
             autoSave: true,
         };
     }

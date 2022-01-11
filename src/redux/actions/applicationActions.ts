@@ -15,7 +15,7 @@ export default interface IApplicationActions {
     toggleDevTools(show: boolean): Promise<void>;
     reloadApplication(): Promise<void>;
     saveAppSettings(appSettings: IAppSettings): IAppSettings;
-    ensureSecurityToken(project: IProject): IAppSettings;
+    // ensureSecurityToken(project: IProject): IAppSettings;
 }
 
 /**
@@ -57,34 +57,34 @@ export function saveAppSettings(appSettings: IAppSettings): (dispatch: Dispatch)
  * Ensures that a valid security token is associated with the project, otherwise creates one
  * @param project The project to validate
  */
-export function ensureSecurityToken(project: IProject):
-    (dispatch: Dispatch, getState: () => IApplicationState) => Promise<IAppSettings> {
-    return async (dispatch: Dispatch, getState: () => IApplicationState) => {
-        const appState = getState();
-        let securityToken = appState.appSettings.securityTokens
-            .find((st) => st.name === project.securityToken);
+// export function ensureSecurityToken(project: IProject):
+//     (dispatch: Dispatch, getState: () => IApplicationState) => Promise<IAppSettings> {
+//     return async (dispatch: Dispatch, getState: () => IApplicationState) => {
+//         const appState = getState();
+//         let securityToken = appState.appSettings.securityTokens
+//             .find((st) => st.name === project.securityToken);
 
-        if (securityToken) {
-            return appState.appSettings;
-        }
+//         if (securityToken) {
+//             return appState.appSettings;
+//         }
 
-        securityToken = {
-            name: `${project.name} Token`,
-            key: generateKey(),
-        };
+//         securityToken = {
+//             name: `${project.name} Token`,
+//             key: generateKey(),
+//         };
 
-        const updatedAppSettings: IAppSettings = {
-            devToolsEnabled: appState.appSettings.devToolsEnabled,
-            securityTokens: [...appState.appSettings.securityTokens, securityToken],
-        };
+//         const updatedAppSettings: IAppSettings = {
+//             devToolsEnabled: appState.appSettings.devToolsEnabled,
+//             securityTokens: [...appState.appSettings.securityTokens, securityToken],
+//         };
 
-        await this.saveAppSettings(updatedAppSettings);
+//         await this.saveAppSettings(updatedAppSettings);
 
-        project.securityToken = securityToken.name;
-        dispatch(ensureSecurityTokenAction(updatedAppSettings));
-        return updatedAppSettings;
-    };
-}
+//         project.securityToken = securityToken.name;
+//         dispatch(ensureSecurityTokenAction(updatedAppSettings));
+//         return updatedAppSettings;
+//     };
+// }
 
 /**
  * Toggle Dev Tools Redux Action type
@@ -110,9 +110,9 @@ export interface ISaveAppSettingsAction extends IPayloadAction<string, IAppSetti
 /**
  * Ensure project security token action type
  */
-export interface IEnsureSecurityTokenAction extends IPayloadAction<string, IAppSettings> {
-    type: ActionTypes.ENSURE_SECURITY_TOKEN_SUCCESS;
-}
+// export interface IEnsureSecurityTokenAction extends IPayloadAction<string, IAppSettings> {
+//     type: ActionTypes.ENSURE_SECURITY_TOKEN_SUCCESS;
+// }
 
 /**
  * Instance of toggle dev tools action
@@ -129,5 +129,5 @@ export const saveAppSettingsAction = createPayloadAction<ISaveAppSettingsAction>
 /**
  * Instance of Export Project action
  */
-export const ensureSecurityTokenAction =
-    createPayloadAction<IEnsureSecurityTokenAction>(ActionTypes.ENSURE_SECURITY_TOKEN_SUCCESS);
+// export const ensureSecurityTokenAction =
+//     createPayloadAction<IEnsureSecurityTokenAction>(ActionTypes.ENSURE_SECURITY_TOKEN_SUCCESS);

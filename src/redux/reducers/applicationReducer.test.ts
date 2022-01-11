@@ -7,7 +7,7 @@ describe("Application Reducer", () => {
     it("Toggle dev tools sets correct state", () => {
         const state: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [],
+            // securityTokens: [],
         };
 
         const action = toggleDevToolsAction(true);
@@ -20,7 +20,7 @@ describe("Application Reducer", () => {
     it("Refreshing app clones state", () => {
         const state: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [],
+            // securityTokens: [],
         };
 
         const action = refreshApplicationAction();
@@ -31,16 +31,16 @@ describe("Application Reducer", () => {
     it("Saves app settings state is persisted", () => {
         const state: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [],
+            // securityTokens: [],
         };
 
         const payload: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [
-                { name: "A", key: "1" },
-                { name: "B", key: "2" },
-                { name: "C", key: "3" },
-            ],
+            // securityTokens: [
+            //     { name: "A", key: "1" },
+            //     { name: "B", key: "2" },
+            //     { name: "C", key: "3" },
+            // ],
         };
 
         const action = saveAppSettingsAction(payload);
@@ -53,7 +53,7 @@ describe("Application Reducer", () => {
     it("Unknown action performs noop", () => {
         const state: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [],
+            // securityTokens: [],
         };
 
         const action = anyOtherAction();

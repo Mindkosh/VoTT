@@ -189,7 +189,7 @@ export default class HomePage extends React.Component<IHomePageProps, IHomePageS
             throw new AppError(ErrorCode.V1ImportError, "Error converting v1 project file");
         }
 
-        this.props.applicationActions.ensureSecurityToken(project);
+        // this.props.applicationActions.ensureSecurityToken(project);
 
         try {
             generatedAssetMetadata = await importService.generateAssets(projectInfo, project);

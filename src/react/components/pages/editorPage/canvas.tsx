@@ -479,9 +479,9 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
         switch (event.keyCode) {
             case 107:
                 newWidth = Math.round( parseFloat( canvas.style.width ) + ( 0.2 * parseFloat( canvas.style.width ) ));
-                newWidth = Math.min( boundingBox.naturalWidth, newWidth );
+                newWidth = Math.min( boundingBox.naturalWidth*1.5, newWidth );
                 newHeight = Math.round( parseFloat( canvas.style.height ) + ( 0.2 * parseFloat( canvas.style.height )) );
-                newHeight = Math.min( boundingBox.naturalHeight, newHeight );
+                newHeight = Math.min( boundingBox.naturalHeight*1.5, newHeight );
 
                 canvas.style.width = `${newWidth}px`;
                 canvas.style.height = `${newHeight}px`;

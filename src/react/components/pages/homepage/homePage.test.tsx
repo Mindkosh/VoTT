@@ -150,7 +150,7 @@ describe("Homepage Component", () => {
             id: "aBC123",
             name: fileInfo.file.name.split(".")[0],
             version: "currentversion",
-            securityToken: `${fileInfo.file.name.split(".")[0]} Token`,
+            // securityToken: `${fileInfo.file.name.split(".")[0]} Token`,
             description: "Converted V1 Project",
             tags: [],
             sourceConnection: testConnection,
@@ -274,7 +274,7 @@ describe("Homepage Component", () => {
             applicationActions: (applicationActions as any) as IApplicationActions,
             appSettings: {
                 devToolsEnabled: false,
-                securityTokens: [],
+                // securityTokens: [],
             },
             match: {
                 params: {},

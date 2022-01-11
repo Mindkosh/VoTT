@@ -10,7 +10,7 @@ describe("App Settings Form", () => {
     const onCancelHandler = jest.fn();
     const defaultAppSettings: IAppSettings = {
         devToolsEnabled: false,
-        securityTokens: [],
+        // securityTokens: [],
     };
 
     function createComponent(props: IAppSettingsFormProps = null)
@@ -39,27 +39,27 @@ describe("App Settings Form", () => {
     it("initializes state with saved app settings", () => {
         const appSettings: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [
-                { name: "A", key: "1" },
-                { name: "B", key: "2" },
-                { name: "C", key: "3" },
-            ],
+            // securityTokens: [
+            //     { name: "A", key: "1" },
+            //     { name: "B", key: "2" },
+            //     { name: "C", key: "3" },
+            // ],
         };
         const props = createProps(appSettings);
         wrapper = createComponent(props);
         expect(wrapper.state("appSettings")).toEqual(appSettings);
-        expect(wrapper.find(".form-row").length).toEqual(appSettings.securityTokens.length);
+        // expect(wrapper.find(".form-row").length).toEqual(appSettings.securityTokens.length);
     });
 
     it("updates state if app settings change", () => {
         wrapper = createComponent();
         const updatedAppSettings: IAppSettings = {
             devToolsEnabled: false,
-            securityTokens: [
-                { name: "A", key: "1" },
-                { name: "B", key: "2" },
-                { name: "C", key: "3" },
-            ],
+            // securityTokens: [
+            //     { name: "A", key: "1" },
+            //     { name: "B", key: "2" },
+            //     { name: "C", key: "3" },
+            // ],
         };
 
         wrapper.setProps({ appSettings: updatedAppSettings });
