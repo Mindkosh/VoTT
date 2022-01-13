@@ -474,20 +474,23 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
     private handleKeypress = (event) => {
         const boundingBox = createContentBoundingBox(this.state.contentSource);
         const canvas = this.canvasZone.current;
+        
         let newWidth = 0;
         let newHeight = 0;
         switch (event.keyCode) {
+            case 73:
             case 107:
                 newWidth = Math.round( parseFloat( canvas.style.width ) + ( 0.2 * parseFloat( canvas.style.width ) ));
-                newWidth = Math.min( boundingBox.naturalWidth*1.5, newWidth );
+                newWidth = Math.min( boundingBox.naturalWidth*2, newWidth );
                 newHeight = Math.round( parseFloat( canvas.style.height ) + ( 0.2 * parseFloat( canvas.style.height )) );
-                newHeight = Math.min( boundingBox.naturalHeight*1.5, newHeight );
+                newHeight = Math.min( boundingBox.naturalHeight*2, newHeight );
 
                 canvas.style.width = `${newWidth}px`;
                 canvas.style.height = `${newHeight}px`;
                 this.editor.resize(newWidth, newHeight);
                 break;
-                
+            
+            case 79:
             case 109:
                 newWidth = Math.round( parseFloat(canvas.style.width) - 0.2*parseFloat(canvas.style.width) );
                 newWidth = Math.max( boundingBox.width, newWidth );
