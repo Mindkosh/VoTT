@@ -50,18 +50,6 @@ export const english: IAppStrings = {
         storageTitle: "Storage Settings",
         uiHelp: "Where your settings are stored",
         save: "Save Settings",
-        // securityToken: {
-        //     name: {
-        //         title: "Name",
-        //     },
-        //     key: {
-        //         title: "Key",
-        //     },
-        // },
-        // securityTokens: {
-        //     title: "Security Tokens",
-        //     description: "Security tokens are used to encrypt sensitive data within your project configuration",
-        // },
         version: {
             description: "Version:",
         },
@@ -80,14 +68,6 @@ export const english: IAppStrings = {
     },
     projectSettings: {
         title: "Project Settings",
-        // securityToken: {
-        //     title: "Security Token",
-        //     description: "Used to encrypt sensitive data within project files",
-        // },
-        // useSecurityToken: {
-        //     title: "Use Security Token",
-        //     description: "When enabled will encrypt sensitive data within provider configuration",
-        // },
         save: "Save Project",
         sourceConnection: {
             title: "Source Connection",
@@ -450,11 +430,6 @@ export const english: IAppStrings = {
             title: "Error Loading Application",
             message: "An error occured while rendering the application. Please try again",
         },
-        // projectInvalidSecurityToken: {
-        //     title: "Error loading project file",
-        //     message: `The security token referenced by the project is invalid.
-        //         Verify that the security token for the project has been set correctly within your application settings`,
-        // },
         projectInvalidJson: {
             title: "Error parsing project file",
             message: "The selected project files does not contain valid JSON. Please check the file any try again.",
@@ -464,11 +439,6 @@ export const english: IAppStrings = {
             message: `An error occured while deleting the project.
                 Validate the project file and security token exist and try again`,
         },
-        // securityTokenNotFound: {
-        //     title: "Error loading project file",
-        //     message: `The security token referenced by the project cannot be found in your current application settings.
-        //         Verify the security token exists and try to reload the project.`,
-        // },
         canvasError: {
             title: "Error loading canvas",
             message: "There was an error loading the canvas, check the project's assets and try again.",

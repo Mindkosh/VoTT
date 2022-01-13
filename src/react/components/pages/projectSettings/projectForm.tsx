@@ -133,13 +133,6 @@ export default class ProjectForm extends React.Component<IProjectFormProps, IPro
 
     private fields() {
         return {
-            // securityToken: CustomField<ISecurityTokenPickerProps>(SecurityTokenPicker, (props) => ({
-            //     id: props.idSchema.$id,
-            //     schema: props.schema,
-            //     value: props.formData,
-            //     securityTokens: this.props.appSettings.securityTokens,
-            //     onChange: props.onChange,
-            // })),
             sourceConnection: CustomField<IConnectionProviderPickerProps>(ConnectionPickerWithRouter, (props) => {
                 return {
                     id: props.idSchema.$id,

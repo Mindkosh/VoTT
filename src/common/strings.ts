@@ -51,18 +51,6 @@ export interface IAppStrings {
         storageTitle: string;
         uiHelp: string;
         save: string;
-        // securityToken: {
-        //     name: {
-        //         title: string;
-        //     },
-        //     key: {
-        //         title: string;
-        //     },
-        // },
-        // securityTokens: {
-        //     title: string;
-        //     description: string;
-        // },
         version: {
             description: string;
         },
@@ -81,14 +69,6 @@ export interface IAppStrings {
     };
     projectSettings: {
         title: string;
-        // securityToken: {
-        //     title: string;
-        //     description: string;
-        // },
-        // useSecurityToken: {
-        //     title: string;
-        //     description: string;
-        // },
         save: string;
         sourceConnection: {
             title: string;
@@ -435,11 +415,9 @@ export interface IAppStrings {
     errors: {
         unknown: IErrorMetadata,
         projectInvalidJson: IErrorMetadata,
-        // projectInvalidSecurityToken: IErrorMetadata,
         projectUploadError: IErrorMetadata,
         projectDeleteError: IErrorMetadata,
         genericRenderError: IErrorMetadata,
-        // securityTokenNotFound: IErrorMetadata,
         canvasError: IErrorMetadata,
         importError: IErrorMetadata,
         pasteRegionTooBigError: IErrorMetadata,

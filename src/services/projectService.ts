@@ -41,7 +41,6 @@ export default class ProjectService implements IProjectService {
     /**
      * Loads a project
      * @param project The project JSON to load
-     * @param securityToken The security token used to decrypt sensitive project settings
      */
     public load(project: IProject): Promise<IProject> {
         Guard.null(project);
@@ -71,7 +70,6 @@ export default class ProjectService implements IProjectService {
     /**
      * Save a project
      * @param project - Project to save
-     * @param securityToken - Security Token to encrypt
      */
     public async save(project: IProject): Promise<IProject> {
         Guard.null(project);

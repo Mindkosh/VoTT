@@ -71,10 +71,6 @@ export default class ProjectSettingsPage extends React.Component<IProjectSetting
         } else if (!this.props.project && projectId) {
             const projectToLoad = this.props.recentProjects.find((project) => project.id === projectId);
             if (projectToLoad) {
-                // if (projectToLoad.useSecurityToken) {
-                //     await this.props.applicationActions.ensureSecurityToken(projectToLoad);
-                // }
-
                 await this.props.projectActions.loadProject(projectToLoad);
             }
         }
@@ -128,10 +124,6 @@ export default class ProjectSettingsPage extends React.Component<IProjectSetting
 
     private onFormSubmit = async (project: IProject) => {
         const isNew = !(!!project.id);
-
-        // if (project.useSecurityToken) {
-        //     await this.props.applicationActions.ensureSecurityToken(project);
-        // }
 
         await this.props.projectActions.saveProject(project);
         localStorage.removeItem(projectFormKey);

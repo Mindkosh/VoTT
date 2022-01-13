@@ -39,18 +39,9 @@ export default interface IProjectActions {
 export function loadProject(project: IProject):
     (dispatch: Dispatch, getState: () => IApplicationState) => Promise<IProject> {
     return async (dispatch: Dispatch, getState: () => IApplicationState) => {
-        const appState = getState();
+        // const appState = getState();
         const projectService = new ProjectService();
-
-        // Lookup security token used to decrypt project settings
-        // const projectToken = appState.appSettings.securityTokens
-        //     .find((securityToken) => securityToken.name === project.securityToken);
-
-        // if (project.useSecurityToken && !projectToken) {
-        //     throw new AppError(ErrorCode.SecurityTokenNotFound, "Security Token Not Found");
-        // }
         const loadedProject = await projectService.load(project);
-        // const loadedProject = await projectService.load(project, projectToken);
 
         dispatch(loadProjectAction(loadedProject));
         return loadedProject;
@@ -89,19 +80,10 @@ export function saveProject(project: IProject)
 export function deleteProject(project: IProject)
     : (dispatch: Dispatch, getState: () => IApplicationState) => Promise<void> {
     return async (dispatch: Dispatch, getState: () => IApplicationState) => {
-        const appState = getState();
+        // const appState = getState();
         const projectService = new ProjectService();
 
-        // Lookup security token used to decrypt project settings
-        // const projectToken = appState.appSettings.securityTokens
-        //     .find((securityToken) => securityToken.name === project.securityToken);
-
-        // if (project.useSecurityToken && !projectToken) {
-        //     throw new AppError(ErrorCode.SecurityTokenNotFound, "Security Token Not Found");
-        // }
-
         const decryptedProject = await projectService.load(project);
-        // const decryptedProject = await projectService.load(project, projectToken);
 
         await projectService.delete(decryptedProject);
         dispatch(deleteProjectAction(decryptedProject));

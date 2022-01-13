@@ -835,41 +835,10 @@ export default class MockFactory {
      * Creates fake IAppSettings
      */
     public static appSettings(): IAppSettings {
-        // const securityTokens = MockFactory.createSecurityTokens();
-
         return {
             devToolsEnabled: false,
-            // securityTokens: [
-            //     ...securityTokens,
-            //     MockFactory.createSecurityToken("TestProject"),
-            //     MockFactory.createSecurityToken("test"),
-            // ],
         };
     }
-
-    /**
-     * Creates a security token used for testing
-     * @param nameSuffix The name suffix to apply to the security token name
-     */
-    // public static createSecurityToken(nameSuffix: string): ISecurityToken {
-    //     return {
-    //         name: `Security-Token-${nameSuffix}`,
-    //         key: generateKey(),
-    //     };
-    // }
-
-    /**
-     * Creates test security tokens
-     * @param count The number of tokens to generate (default: 10)
-     */
-    // public static createSecurityTokens(count: number = 10): ISecurityToken[] {
-    //     const securityTokens: ISecurityToken[] = [];
-    //     for (let i = 1; i <= 10; i++) {
-    //         securityTokens.push(MockFactory.createSecurityToken(i.toString()));
-    //     }
-
-    //     return securityTokens;
-    // }
 
     /**
      * Creates fake IProjectSettingsPageProps

@@ -51,11 +51,6 @@ describe("Application Redux Actions", () => {
     it("Save app settings action saves state", async () => {
         const appSettings: IAppSettings = {
             devToolsEnabled: false,
-            // securityTokens: [
-            //     { name: "A", key: "1" },
-            //     { name: "B", key: "2" },
-            //     { name: "C", key: "3" },
-            // ],
         };
 
         const result = await applicationActions.saveAppSettings(appSettings)(store.dispatch);
@@ -73,11 +68,6 @@ describe("Application Redux Actions", () => {
     it("Ensure security token action creates a token if one doesn't exist", async () => {
         const appSettings: IAppSettings = {
             devToolsEnabled: false,
-            // securityTokens: [
-            //     { name: "A", key: "1" },
-            //     { name: "B", key: "2" },
-            //     { name: "C", key: "3" },
-            // ],
         };
         const middleware = [thunk];
         const mockState: IApplicationState = {
@@ -88,18 +78,5 @@ describe("Application Redux Actions", () => {
         store = createMockStore<IApplicationState>(middleware)(mockState);
 
         const testProject = MockFactory.createTestProject("TestProject");
-
-        // const result = await applicationActions.ensureSecurityToken(testProject)(store.dispatch, store.getState);
-        // const actions = store.getActions();
-
-        // expect(actions.length).toEqual(1);
-        // expect(actions[0]).toEqual({
-        //     type: ActionTypes.ENSURE_SECURITY_TOKEN_SUCCESS,
-        //     payload: result,
-        // });
-
-        // expect(testProject.securityToken).toEqual("Project TestProject Token");
-        // expect(result.securityTokens).toHaveLength(4);
-        // expect(result.securityTokens[3].name).toBe(testProject.securityToken);
     });
 });

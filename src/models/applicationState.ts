@@ -77,11 +77,9 @@ export interface IProviderOptions {
  * @name - Application settings
  * @description - Defines the root level configuration options for the application
  * @member devToolsEnabled - Whether dev tools are current open and enabled
- * @member securityTokens - Token used to encrypt sensitive project settings
  */
 export interface IAppSettings {
     devToolsEnabled: boolean;
-    // securityTokens: ISecurityToken[];
     thumbnailSize?: ISize;
 }
 
@@ -90,7 +88,6 @@ export interface IAppSettings {
  * @description - Defines the structure of a VoTT project
  * @member id - Unique identifier
  * @member name - User defined name
- * @member securityToken - The Base64 encoded token used to encrypt sensitive project data
  * @member description - User defined description
  * @member tags - User defined list of tags
  * @member sourceConnection - Full source connection details
@@ -103,8 +100,6 @@ export interface IProject {
     id: string;
     name: string;
     version: string;
-    // useSecurityToken: boolean;
-    // securityToken?: string;
     description?: string;
     tags: ITag[];
     sourceConnection: IConnection;
@@ -355,11 +350,6 @@ export enum EditorMode {
 export interface ISecureString {
     encrypted: string;
 }
-
-// export interface ISecurityToken {
-//     name: string;
-//     key: string;
-// }
 
 export interface ITFRecordMetadata {
     width: number;

@@ -39,9 +39,7 @@ describe("Project Redux Actions", () => {
 
     it("Load Project action resolves a promise and dispatches redux action", async () => {
         const project = MockFactory.createTestProject("TestProject");
-        // const projectToken = appSettings.securityTokens
-        //     .find((securityToken) => securityToken.name === project.securityToken);
-
+       
         const result = await projectActions.loadProject(project)(store.dispatch, store.getState);
         const actions = store.getActions();
 
@@ -58,8 +56,6 @@ describe("Project Redux Actions", () => {
         projectServiceMock.prototype.save = jest.fn((project) => Promise.resolve(project));
 
         const project = MockFactory.createTestProject("TestProject");
-        // const projectToken = appSettings.securityTokens
-        //     .find((securityToken) => securityToken.name === project.securityToken);
 
         const result = await projectActions.saveProject(project)(store.dispatch, store.getState);
         const actions = store.getActions();

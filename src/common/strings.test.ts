@@ -47,12 +47,6 @@ describe("Localization tests", () => {
                 const appSettings = languageJson.appSettings;
                 const newFormJson = addLocValues(formJson);
                 const formProps = newFormJson.properties;
-                const securityTokenProps = formProps.securityTokens.items.properties;
-
-                // expect(formProps.securityTokens.title).toEqual(appSettings.securityTokens.title);
-                // expect(formProps.securityTokens.description).toEqual(appSettings.securityTokens.description);
-                // expect(securityTokenProps.name.title).toEqual(appSettings.securityToken.name.title);
-                // expect(securityTokenProps.key.title).toEqual(appSettings.securityToken.key.title);
             }
         });
 
