@@ -19,7 +19,6 @@ import {
 import ImportService from "../../../../services/importService";
 import { IAssetMetadata } from "../../../../models/applicationState";
 import { toast } from "react-toastify";
-import MessageBox from "../../common/messageBox/messageBox";
 import { isElectron } from "../../../../common/hostProcess";
 
 export interface IHomePageProps extends RouteComponentProps, React.Props<HomePage> {
@@ -188,8 +187,6 @@ export default class HomePage extends React.Component<IHomePageProps, IHomePageS
         } catch (e) {
             throw new AppError(ErrorCode.V1ImportError, "Error converting v1 project file");
         }
-
-        this.props.applicationActions.ensureSecurityToken(project);
 
         try {
             generatedAssetMetadata = await importService.generateAssets(projectInfo, project);

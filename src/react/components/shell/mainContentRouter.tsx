@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/homepage/homePage";
-// import ActiveLearningPage from "../pages/activeLearning/activeLearningPage";
 import AppSettingsPage from "../pages/appSettings/appSettingsPage";
 import ConnectionPage from "../pages/connections/connectionsPage";
 import EditorPage from "../pages/editorPage/editorPage";
@@ -24,7 +23,6 @@ export default function MainContentRouter() {
                 <Route path="/projects/create" component={ProjectSettingsPage} />
                 <Route path="/projects/:projectId/settings" component={ProjectSettingsPage} />
                 <Route path="/projects/:projectId/export" component={ExportPage} />
-                {/* <Route path="/projects/:projectId/active-learning" component={ActiveLearningPage} /> */}
                 <Route component={HomePage} />
             </Switch>
         </div>

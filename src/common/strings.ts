@@ -51,18 +51,6 @@ export interface IAppStrings {
         storageTitle: string;
         uiHelp: string;
         save: string;
-        securityToken: {
-            name: {
-                title: string;
-            },
-            key: {
-                title: string;
-            },
-        },
-        securityTokens: {
-            title: string;
-            description: string;
-        },
         version: {
             description: string;
         },
@@ -81,14 +69,6 @@ export interface IAppStrings {
     };
     projectSettings: {
         title: string;
-        securityToken: {
-            title: string;
-            description: string;
-        },
-        useSecurityToken: {
-            title: string;
-            description: string;
-        },
         save: string;
         sourceConnection: {
             title: string;
@@ -273,7 +253,6 @@ export interface IAppStrings {
             nextAsset: string;
             saveProject: string;
             exportProject: string;
-            activeLearning: string;
         }
         videoPlayer: {
             nextTaggedFrame: {
@@ -430,59 +409,19 @@ export interface IAppStrings {
             saveSuccess: string;
         },
     };
-    activeLearning: {
-        title: string;
-        form: {
-            properties: {
-                modelPathType: {
-                    title: string,
-                    description: string,
-                    options: {
-                        preTrained: string,
-                        customFilePath: string,
-                        customWebUrl: string,
-                    },
-                },
-                autoDetect: {
-                    title: string,
-                    description: string,
-                },
-                predictTag: {
-                    title: string,
-                    description: string,
-                },
-                modelPath: {
-                    title: string,
-                    description: string,
-                },
-                modelUrl: {
-                    title: string,
-                    description: string,
-                },
-            },
-        }
-        messages: {
-            loadingModel: string;
-            errorLoadModel: string;
-            saveSuccess: string;
-        }
-    };
     profile: {
         settings: string;
     };
     errors: {
         unknown: IErrorMetadata,
         projectInvalidJson: IErrorMetadata,
-        projectInvalidSecurityToken: IErrorMetadata,
         projectUploadError: IErrorMetadata,
         projectDeleteError: IErrorMetadata,
         genericRenderError: IErrorMetadata,
-        securityTokenNotFound: IErrorMetadata,
         canvasError: IErrorMetadata,
         importError: IErrorMetadata,
         pasteRegionTooBigError: IErrorMetadata,
         exportFormatNotFound: IErrorMetadata,
-        activeLearningPredictionError: IErrorMetadata,
     };
 }
 

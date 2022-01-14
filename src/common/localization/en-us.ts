@@ -50,18 +50,6 @@ export const english: IAppStrings = {
         storageTitle: "Storage Settings",
         uiHelp: "Where your settings are stored",
         save: "Save Settings",
-        securityToken: {
-            name: {
-                title: "Name",
-            },
-            key: {
-                title: "Key",
-            },
-        },
-        securityTokens: {
-            title: "Security Tokens",
-            description: "Security tokens are used to encrypt sensitive data within your project configuration",
-        },
         version: {
             description: "Version:",
         },
@@ -80,14 +68,6 @@ export const english: IAppStrings = {
     },
     projectSettings: {
         title: "Project Settings",
-        securityToken: {
-            title: "Security Token",
-            description: "Used to encrypt sensitive data within project files",
-        },
-        useSecurityToken: {
-            title: "Use Security Token",
-            description: "When enabled will encrypt sensitive data within provider configuration",
-        },
         save: "Save Project",
         sourceConnection: {
             title: "Source Connection",
@@ -275,7 +255,6 @@ export const english: IAppStrings = {
             nextAsset: "Next Asset",
             saveProject: "Save Project",
             exportProject: "Export Project",
-            activeLearning: "Active Learning",
         },
         videoPlayer: {
             previousTaggedFrame: {
@@ -434,43 +413,6 @@ export const english: IAppStrings = {
             saveSuccess: "Successfully saved export settings",
         },
     },
-    activeLearning: {
-        title: "Active Learning",
-        form: {
-            properties: {
-                modelPathType: {
-                    title: "Model Provider",
-                    description: "Where to load the training model from",
-                    options: {
-                        preTrained: "Pre-trained Coco SSD",
-                        customFilePath: "Custom (File path)",
-                        customWebUrl: "Custom (Url)",
-                    },
-                },
-                autoDetect: {
-                    title: "Auto Detect",
-                    description: "Whether or not to automatically make predictions as you navigate between assets",
-                },
-                modelPath: {
-                    title: "Model path",
-                    description: "Select a model from your local file system",
-                },
-                modelUrl: {
-                    title: "Model URL",
-                    description: "Load your model from a public web URL",
-                },
-                predictTag: {
-                    title: "Predict Tag",
-                    description: "Whether or not to automatically include tags in predictions",
-                },
-            },
-        },
-        messages: {
-            loadingModel: "Loading active learning model...",
-            errorLoadModel: "Error loading active learning model",
-            saveSuccess: "Successfully saved active learning settings",
-        },
-    },
     profile: {
         settings: "Profile Settings",
     },
@@ -488,11 +430,6 @@ export const english: IAppStrings = {
             title: "Error Loading Application",
             message: "An error occured while rendering the application. Please try again",
         },
-        projectInvalidSecurityToken: {
-            title: "Error loading project file",
-            message: `The security token referenced by the project is invalid.
-                Verify that the security token for the project has been set correctly within your application settings`,
-        },
         projectInvalidJson: {
             title: "Error parsing project file",
             message: "The selected project files does not contain valid JSON. Please check the file any try again.",
@@ -501,11 +438,6 @@ export const english: IAppStrings = {
             title: "Error deleting project",
             message: `An error occured while deleting the project.
                 Validate the project file and security token exist and try again`,
-        },
-        securityTokenNotFound: {
-            title: "Error loading project file",
-            message: `The security token referenced by the project cannot be found in your current application settings.
-                Verify the security token exists and try to reload the project.`,
         },
         canvasError: {
             title: "Error loading canvas",
@@ -522,11 +454,6 @@ export const english: IAppStrings = {
         exportFormatNotFound: {
             title: "Error exporting project",
             message: "Project is missing export format.  Please select an export format in the export setting page.",
-        },
-        activeLearningPredictionError: {
-            title: "Active Learning Error",
-            message: "An error occurred while predicting regions in the current asset. \
-                Please verify your active learning configuration and try again",
         },
     },
 };

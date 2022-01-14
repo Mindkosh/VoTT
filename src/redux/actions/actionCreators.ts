@@ -2,7 +2,6 @@ import { Action } from "redux";
 import { IToggleDevToolsAction,
          IRefreshApplicationAction,
          ISaveAppSettingsAction,
-         IEnsureSecurityTokenAction,
 } from "./applicationActions";
 import { ActionTypes } from "./actionTypes";
 import {
@@ -74,7 +73,6 @@ export type AnyAction = IOtherAction |
     IToggleDevToolsAction |
     IRefreshApplicationAction |
     ISaveAppSettingsAction |
-    IEnsureSecurityTokenAction |
     ILoadConnectionAction |
     ISaveConnectionAction |
     IDeleteConnectionAction |

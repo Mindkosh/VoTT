@@ -6,7 +6,6 @@ import { IStorageProvider } from "../../../providers/storage/storageProviderFact
 import { IAsset, AssetType, StorageType, IConnection } from "../../../models/applicationState";
 import { AssetService } from "../../../services/assetService";
 import { strings } from "../../../common/strings";
-import { ILocalFileSystemProxyOptions } from "../../../providers/storage/localFileSystemProxy";
 
 export default class LocalFileSystem implements IStorageProvider {
     public storageType: StorageType.Local;

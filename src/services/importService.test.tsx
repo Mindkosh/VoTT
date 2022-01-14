@@ -27,7 +27,6 @@ describe("Import Service", () => {
         expect(result.name).toEqual("TestV1Project");
         expect(result.id).not.toBeNull();
         expect(result.version).toEqual(packageJson.version);
-        expect(result.securityToken).toEqual("TestV1Project Token");
         expect(result.description).toEqual("Converted V1 Project");
         expect(result.tags).toHaveLength(2);
         expect(result.sourceConnection.name).toEqual("TestV1Project Connection");
@@ -48,7 +47,6 @@ describe("Import Service", () => {
         expect(result.name).toEqual("TestV1VideoProject");
         expect(result.id).not.toBeNull();
         expect(result.version).toEqual(packageJson.version);
-        expect(result.securityToken).toEqual("TestV1VideoProject Token");
         expect(result.description).toEqual("Converted V1 Project");
         expect(result.tags).toHaveLength(2);
         expect(result.sourceConnection.name).toEqual("TestV1VideoProject Connection");

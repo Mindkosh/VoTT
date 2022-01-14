@@ -1,9 +1,8 @@
-import shortid from "shortid";
 import {
     AssetState, AssetType, IApplicationState, IAppSettings, IAsset, IAssetMetadata,
-    IConnection, IExportFormat, IProject, ITag, StorageType, ISecurityToken,
+    IConnection, IExportFormat, IProject, ITag, StorageType,
     EditorMode, IAppError, IProjectVideoSettings, ErrorCode,
-    IPoint, IRegion, RegionType, ModelPathType,
+    IRegion, RegionType,
 } from "../models/applicationState";
 import { IV1Project, IV1Region } from "../models/v1Models";
 import { ExportAssetState } from "../providers/export/exportProvider";
@@ -18,12 +17,8 @@ import { IProjectService } from "../services/projectService";
 import Canvas, { ICanvasProps } from "../react/components/pages/editorPage/canvas";
 import { IBingImageSearchOptions, BingImageSearchAspectRatio } from "../providers/storage/bingImageSearch";
 import { IEditorPageProps } from "../react/components/pages/editorPage/editorPage";
-// import {
-//     IAzureCustomVisionTag, IAzureCustomVisionRegion,
-// } from "../providers/export/azureCustomVision/azureCustomVisionService";
 import IApplicationActions, * as applicationActions from "../redux/actions/applicationActions";
 import { ILocalFileSystemProxyOptions } from "../providers/storage/localFileSystemProxy";
-import { generateKey } from "./crypto";
 import { AssetService } from "../services/assetService";
 import { Point2D } from "vott-ct/lib/js/CanvasTools/Core/Point2D";
 import { RegionDataType, RegionData } from "vott-ct/lib/js/CanvasTools/Core/RegionData";
@@ -33,7 +28,6 @@ import { SelectionMode } from "vott-ct/lib/js/CanvasTools/Interface/ISelectorSet
 import { IKeyboardBindingProps } from "../react/components/common/keyboardBinding/keyboardBinding";
 import { KeyEventType } from "../react/components/common/keyboardManager/keyboardManager";
 import { IKeyboardRegistrations } from "../react/components/common/keyboardManager/keyboardRegistrationManager";
-// import { IActiveLearningPageProps } from "../react/components/pages/activeLearning/activeLearningPage";
 
 export default class MockFactory {
 
@@ -277,21 +271,13 @@ export default class MockFactory {
             id: `project-${name}`,
             name: `Project ${name}`,
             version: appInfo.version,
-            useSecurityToken: true,
-            securityToken: `Security-Token-${name}`,
+            scanSourceDir: true,
             assets: {},
             exportFormat: MockFactory.exportFormat(),
             sourceConnection: connection,
             targetConnection: connection,
             tags: MockFactory.createTestTags(tagCount),
             videoSettings: MockFactory.createVideoSettings(),
-            activeLearningSettings: {
-                modelPathType: ModelPathType.Coco,
-                modelPath: "",
-                modelUrl: "",
-                autoDetect: false,
-                predictTag: false,
-            },
             autoSave: true,
         };
     }
@@ -850,40 +836,9 @@ export default class MockFactory {
      * Creates fake IAppSettings
      */
     public static appSettings(): IAppSettings {
-        const securityTokens = MockFactory.createSecurityTokens();
-
         return {
             devToolsEnabled: false,
-            securityTokens: [
-                ...securityTokens,
-                MockFactory.createSecurityToken("TestProject"),
-                MockFactory.createSecurityToken("test"),
-            ],
         };
-    }
-
-    /**
-     * Creates a security token used for testing
-     * @param nameSuffix The name suffix to apply to the security token name
-     */
-    public static createSecurityToken(nameSuffix: string): ISecurityToken {
-        return {
-            name: `Security-Token-${nameSuffix}`,
-            key: generateKey(),
-        };
-    }
-
-    /**
-     * Creates test security tokens
-     * @param count The number of tokens to generate (default: 10)
-     */
-    public static createSecurityTokens(count: number = 10): ISecurityToken[] {
-        const securityTokens: ISecurityToken[] = [];
-        for (let i = 1; i <= 10; i++) {
-            securityTokens.push(MockFactory.createSecurityToken(i.toString()));
-        }
-
-        return securityTokens;
     }
 
     /**
@@ -897,21 +852,6 @@ export default class MockFactory {
             appSettings: MockFactory.appSettings(),
         };
     }
-
-    /**
-     * Creates fake IActiveLearningPageProps
-     * @param projectId Current project ID
-     */
-    // public static activeLearningProps(projectId?: string): IActiveLearningPageProps {
-    //     return {
-    //         actions: (projectActions as any) as IProjectActions,
-    //         history: MockFactory.history(),
-    //         location: MockFactory.location(),
-    //         match: MockFactory.match(projectId, "active-learning"),
-    //         project: null,
-    //         recentProjects: MockFactory.createTestProjects(),
-    //     };
-    // }
 
     /**
      * Creates fake IEditorPageProps

@@ -7,7 +7,7 @@ import { StorageProviderFactory } from "../../../../providers/storage/storagePro
 import { ConnectionPickerWithRouter } from "../../common/connectionPicker/connectionPicker";
 import { CustomField, CustomWidget } from "../../common/customField/customField";
 import CustomFieldTemplate from "../../common/customField/customFieldTemplate";
-import { ISecurityTokenPickerProps, SecurityTokenPicker } from "../../common/securityTokenPicker/securityTokenPicker";
+
 import "vott-react/dist/css/tagsInput.css";
 import Checkbox from "rc-checkbox";
 import { IConnectionProviderPickerProps } from "../../common/connectionProviderPicker/connectionProviderPicker";
@@ -133,13 +133,6 @@ export default class ProjectForm extends React.Component<IProjectFormProps, IPro
 
     private fields() {
         return {
-            securityToken: CustomField<ISecurityTokenPickerProps>(SecurityTokenPicker, (props) => ({
-                id: props.idSchema.$id,
-                schema: props.schema,
-                value: props.formData,
-                securityTokens: this.props.appSettings.securityTokens,
-                onChange: props.onChange,
-            })),
             sourceConnection: CustomField<IConnectionProviderPickerProps>(ConnectionPickerWithRouter, (props) => {
                 return {
                     id: props.idSchema.$id,

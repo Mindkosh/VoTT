@@ -39,9 +39,7 @@ describe("Project Redux Actions", () => {
 
     it("Load Project action resolves a promise and dispatches redux action", async () => {
         const project = MockFactory.createTestProject("TestProject");
-        const projectToken = appSettings.securityTokens
-            .find((securityToken) => securityToken.name === project.securityToken);
-
+       
         const result = await projectActions.loadProject(project)(store.dispatch, store.getState);
         const actions = store.getActions();
 
@@ -51,15 +49,13 @@ describe("Project Redux Actions", () => {
             payload: project,
         });
         expect(result).toEqual(project);
-        expect(projectServiceMock.prototype.load).toBeCalledWith(project, projectToken);
+        expect(projectServiceMock.prototype.load).toBeCalledWith(project);
     });
 
     it("Save Project action calls project service and dispatches redux action", async () => {
         projectServiceMock.prototype.save = jest.fn((project) => Promise.resolve(project));
 
         const project = MockFactory.createTestProject("TestProject");
-        const projectToken = appSettings.securityTokens
-            .find((securityToken) => securityToken.name === project.securityToken);
 
         const result = await projectActions.saveProject(project)(store.dispatch, store.getState);
         const actions = store.getActions();
@@ -74,8 +70,8 @@ describe("Project Redux Actions", () => {
             payload: project,
         });
         expect(result).toEqual(project);
-        expect(projectServiceMock.prototype.save).toBeCalledWith(project, projectToken);
-        expect(projectServiceMock.prototype.load).toBeCalledWith(project, projectToken);
+        expect(projectServiceMock.prototype.save).toBeCalledWith(project);
+        expect(projectServiceMock.prototype.load).toBeCalledWith(project);
     });
 
     it("Save Project action correctly add project version", async () => {

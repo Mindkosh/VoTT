@@ -10,14 +10,14 @@ import { strings } from "../../../../common/strings";
 import {
     AssetState, AssetType, EditorMode, IApplicationState,
     IAppSettings, IAsset, IAssetMetadata, IProject, IRegion,
-    ISize, ITag, IAdditionalPageSettings, AppError, ErrorCode,
+    ISize, ITag,
 } from "../../../../models/applicationState";
 import { IToolbarItemRegistration, ToolbarItemFactory } from "../../../../providers/toolbar/toolbarItemFactory";
 import IApplicationActions, * as applicationActions from "../../../../redux/actions/applicationActions";
 import IProjectActions, * as projectActions from "../../../../redux/actions/projectActions";
 import { ToolbarItemName } from "../../../../registerToolbar";
 import { AssetService } from "../../../../services/assetService";
-import { AssetPreview } from "../../common/assetPreview/assetPreview";
+import { AssetPreview, IAssetPreviewSettings  } from "../../common/assetPreview/assetPreview";
 import { KeyboardBinding } from "../../common/keyboardBinding/keyboardBinding";
 import { KeyEventType } from "../../common/keyboardManager/keyboardManager";
 import { TagInput } from "../../common/tagInput/tagInput";
@@ -29,7 +29,6 @@ import EditorSideBar from "./editorSideBar";
 import { EditorToolbar } from "./editorToolbar";
 import Alert from "../../common/alert/alert";
 import Confirm from "../../common/confirm/confirm";
-// import { ActiveLearningService } from "../../../../services/activeLearningService";
 
 /**
  * Properties for Editor Page
@@ -63,7 +62,7 @@ export interface IEditorPageState {
     /** The child assets used for nest asset typs */
     childAssets?: IAsset[];
     /** Additional settings for asset previews */
-    additionalSettings?: IAdditionalPageSettings;
+    additionalSettings?: IAssetPreviewSettings;
     /** Most recently selected tag */
     selectedTag: string;
     /** Tags locked for region labeling */
@@ -109,14 +108,12 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         editorMode: EditorMode.Rectangle,
         additionalSettings: {
             videoSettings: (this.props.project) ? this.props.project.videoSettings : null,
-            // activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null,
         },
         thumbnailSize: this.props.appSettings.thumbnailSize || { width: 175, height: 155 },
         isValid: true,
         showInvalidRegionWarning: false,
     };
 
-    // private activeLearningService: ActiveLearningService = null;
     private loadingProjectAssets: boolean = false;
     private toolbarItems: IToolbarItemRegistration[] = ToolbarItemFactory.getToolbarItems();
     private canvas: RefObject<Canvas> = React.createRef();
@@ -124,7 +121,6 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
     private deleteTagConfirm: React.RefObject<Confirm> = React.createRef();
 
     public async componentDidMount() {
-        console.log("mounted");
         const projectId = this.props.match.params["projectId"];
         if (this.props.project) {
             await this.loadProjectAssets();
@@ -132,8 +128,6 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             const project = this.props.recentProjects.find((project) => project.id === projectId);
             await this.props.actions.loadProject(project);
         }
-
-        // this.activeLearningService = new ActiveLearningService(this.props.project.activeLearningSettings);
     }
 
     public async componentDidUpdate(prevProps: Readonly<IEditorPageProps>) {
@@ -148,7 +142,6 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             this.setState({
                 additionalSettings: {
                     videoSettings: (this.props.project) ? this.props.project.videoSettings : null,
-                    // activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null,
                 },
             });
         }
@@ -162,7 +155,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         const { project } = this.props;
         const { assets, selectedAsset } = this.state;
         const rootAssets = assets.filter((asset) => !asset.parent);
-        console.log("rendering");
+        
         if (!project) {
             return (<div>Loading...</div>);
         }
@@ -217,7 +210,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
                                         ref={this.canvas}
                                         selectedAsset={this.state.selectedAsset}
                                         onAssetMetadataChanged={this.onAssetMetadataChanged}
-                                        onCanvasRendered={this.onCanvasRendered}
+                                        // onCanvasRendered={this.onCanvasRendered}
                                         onSelectedRegionsChanged={this.onSelectedRegionsChanged}
                                         editorMode={this.state.editorMode}
                                         selectionMode={this.state.selectionMode}
@@ -486,18 +479,6 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         this.setState({ childAssets, assets, isValid: true });
     }
 
-    /**
-     * Raised when the asset binary has been painted onto the canvas tools rendering canvas
-     */
-    private onCanvasRendered = async (canvas: HTMLCanvasElement) => {
-        // When active learning auto-detect is enabled
-        // run predictions when asset changes
-        // if (this.props.project.activeLearningSettings.autoDetect && !this.state.selectedAsset.asset.predicted) {
-        //     await this.predictRegions(canvas);
-        // }
-        return;
-    }
-
     private onSelectedRegionsChanged = (selectedRegions: IRegion[]) => {
         this.setState({ selectedRegions });
     }
@@ -559,43 +540,8 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             case ToolbarItemName.RemoveAllRegions:
                 this.canvas.current.confirmRemoveAllRegions();
                 break;
-            // case ToolbarItemName.ActiveLearning:
-            //     await this.predictRegions();
-            //     break;
         }
     }
-
-    // private predictRegions = async (canvas?: HTMLCanvasElement) => {
-    //     canvas = canvas || document.querySelector("canvas");
-    //     if (!canvas) {
-    //         return;
-    //     }
-
-    //     // Load the configured ML model
-    //     if (!this.activeLearningService.isModelLoaded()) {
-    //         let toastId: number = null;
-    //         try {
-    //             toastId = toast.info(strings.activeLearning.messages.loadingModel, { autoClose: false });
-    //             await this.activeLearningService.ensureModelLoaded();
-    //         } catch (e) {
-    //             toast.error(strings.activeLearning.messages.errorLoadModel);
-    //             return;
-    //         } finally {
-    //             toast.dismiss(toastId);
-    //         }
-    //     }
-
-    //     // Predict and add regions to current asset
-    //     try {
-    //         const updatedAssetMetadata = await this.activeLearningService
-    //             .predictRegions(canvas, this.state.selectedAsset);
-
-    //         await this.onAssetMetadataChanged(updatedAssetMetadata);
-    //         this.setState({ selectedAsset: updatedAssetMetadata });
-    //     } catch (e) {
-    //         throw new AppError(ErrorCode.ActiveLearningPredictionError, "Error predicting regions");
-    //     }
-    // }
 
     /**
      * Navigates to the previous / next root asset on the sidebar
@@ -662,13 +608,16 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             .filter((asset) => !asset.parent);
 
         // Get all root assets from source asset provider
-        const sourceAssets = await this.props.actions.loadAssets(this.props.project);
-
+        
         // Merge and uniquify
-        const rootAssets = _(rootProjectAssets)
-            .concat(sourceAssets)
-            .uniqBy((asset) => asset.id)
-            .value();
+        let rootAssets = rootProjectAssets;
+        if( this.props.project.scanSourceDir ){
+            const sourceAssets = await this.props.actions.loadAssets(this.props.project);
+            rootAssets = _(rootProjectAssets)
+                .concat(sourceAssets)
+                .uniqBy((asset) => asset.id)
+                .value();
+        }
 
         const lastVisited = rootAssets.find((asset) => asset.id === this.props.project.lastVisitedAssetId);
 

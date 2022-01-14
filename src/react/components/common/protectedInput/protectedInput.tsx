@@ -3,7 +3,6 @@ import React, { RefObject, SyntheticEvent } from "react";
 /**
  * Protected input properties
  * @member value - The value to bind to the component
- * @member securityToken - Optional value used to encrypt/decrypt the value
  */
 export interface IProtectedInputProps extends React.Props<ProtectedInput> {
     id: string;

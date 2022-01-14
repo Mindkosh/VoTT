@@ -2,13 +2,12 @@ import _ from "lodash";
 import shortid from "shortid";
 import { StorageProviderFactory } from "../providers/storage/storageProviderFactory";
 import {
-    IProject, ISecurityToken, AppError,
+    IProject, AppError,
     ErrorCode,
 } from "../models/applicationState";
 import Guard from "../common/guard";
 import { constants } from "../common/constants";
 import { ExportProviderFactory } from "../providers/export/exportProviderFactory";
-import { decryptProject, encryptProject } from "../common/utils";
 import packageJson from "../../package.json";
 import { ExportAssetState } from "../providers/export/exportProvider";
 import { IExportFormat } from "vott-react";
@@ -19,17 +18,11 @@ import { IExportFormat } from "vott-react";
  * @member delete - Delete a project
  */
 export interface IProjectService {
-    load(project: IProject, securityToken?: ISecurityToken): Promise<IProject>;
-    save(project: IProject, securityToken?: ISecurityToken): Promise<IProject>;
+    load(project: IProject): Promise<IProject>;
+    save(project: IProject): Promise<IProject>;
     delete(project: IProject): Promise<void>;
     isDuplicate(project: IProject, projectList: IProject[]): boolean;
 }
-
-// const defaultActiveLearningSettings: IActiveLearningSettings = {
-//     autoDetect: false,
-//     predictTag: true,
-//     modelPathType: ModelPathType.Coco,
-// };
 
 const defaultExportOptions: IExportFormat = {
     providerType: "vottJson",
@@ -47,26 +40,21 @@ export default class ProjectService implements IProjectService {
     /**
      * Loads a project
      * @param project The project JSON to load
-     * @param securityToken The security token used to decrypt sensitive project settings
      */
-    public load(project: IProject, securityToken?: ISecurityToken): Promise<IProject> {
+    public load(project: IProject): Promise<IProject> {
         Guard.null(project);
 
         try {
-            const loadedProject = project.useSecurityToken
-                ? decryptProject(project, securityToken)
-                : { ...project };
+            const loadedProject = { ...project };
 
             // Ensure tags is always initialized to an array
             if (!loadedProject.tags) {
                 loadedProject.tags = [];
             }
 
-            // Initialize active learning settings if they don't exist
-            // if (!loadedProject.activeLearningSettings) {
-            //     loadedProject.activeLearningSettings = defaultActiveLearningSettings;
-            // }
-
+            if( !loadedProject.hasOwnProperty("scanSourceDir") ){
+                loadedProject.scanSourceDir = true;
+            }
             // Initialize export settings if they don't exist
             if (!loadedProject.exportFormat) {
                 loadedProject.exportFormat = defaultExportOptions;
@@ -76,7 +64,7 @@ export default class ProjectService implements IProjectService {
 
             return Promise.resolve({ ...loadedProject });
         } catch (e) {
-            const error = new AppError(ErrorCode.ProjectInvalidSecurityToken, "Error decrypting project settings");
+            const error = new AppError(ErrorCode.GenericRenderError, "Generic error loading project service");
             return Promise.reject(error);
         }
     }
@@ -84,9 +72,8 @@ export default class ProjectService implements IProjectService {
     /**
      * Save a project
      * @param project - Project to save
-     * @param securityToken - Security Token to encrypt
      */
-    public async save(project: IProject, securityToken?: ISecurityToken): Promise<IProject> {
+    public async save(project: IProject): Promise<IProject> {
         Guard.null(project);
 
         if (!project.id) {
@@ -97,12 +84,7 @@ export default class ProjectService implements IProjectService {
         if (!project.tags) {
             project.tags = [];
         }
-
-        // Initialize active learning settings if they don't exist
-        // if (!project.activeLearningSettings) {
-        //     project.activeLearningSettings = defaultActiveLearningSettings;
-        // }
-
+        
         // Initialize export settings if they don't exist
         if (!project.exportFormat) {
             project.exportFormat = defaultExportOptions;
@@ -112,9 +94,7 @@ export default class ProjectService implements IProjectService {
 
         const storageProvider = StorageProviderFactory.createFromConnection(project.targetConnection);
         await this.saveExportSettings(project);
-        project = project.useSecurityToken
-            ? encryptProject(project, securityToken)
-            : { ...project };
+        project = { ...project };
 
         await storageProvider.writeText(
             `${project.name}${constants.projectFileExtension}`,

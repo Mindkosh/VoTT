@@ -2,7 +2,7 @@
     "name": "vott",
     "version": "2.3.0",
     "author": {
-        "name": "Shikhar",
+        "name": "Shikhar Dev Gupta",
         "url": "https://github.com/Mindkosh/VoTT",
         "email": "sdevgupta@mindkosh.com"
     },
@@ -10,7 +10,7 @@
     "homepage": "https://github.com/Microsoft/VoTT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Mindkosh/VoTTt"
+        "url": "https://github.com/Mindkosh/VoTT"
     },
     "license": "MIT",
     "private": true,
