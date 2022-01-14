@@ -8,7 +8,6 @@ import {
 import Guard from "../common/guard";
 import { constants } from "../common/constants";
 import { ExportProviderFactory } from "../providers/export/exportProviderFactory";
-// import { decryptProject, encryptProject } from "../common/utils";
 import packageJson from "../../package.json";
 import { ExportAssetState } from "../providers/export/exportProvider";
 import { IExportFormat } from "vott-react";
@@ -53,6 +52,9 @@ export default class ProjectService implements IProjectService {
                 loadedProject.tags = [];
             }
 
+            if( !loadedProject.hasOwnProperty("scanSourceDir") ){
+                loadedProject.scanSourceDir = true;
+            }
             // Initialize export settings if they don't exist
             if (!loadedProject.exportFormat) {
                 loadedProject.exportFormat = defaultExportOptions;

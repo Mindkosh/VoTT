@@ -121,7 +121,6 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
     private deleteTagConfirm: React.RefObject<Confirm> = React.createRef();
 
     public async componentDidMount() {
-        console.log("mounted");
         const projectId = this.props.match.params["projectId"];
         if (this.props.project) {
             await this.loadProjectAssets();
@@ -156,7 +155,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         const { project } = this.props;
         const { assets, selectedAsset } = this.state;
         const rootAssets = assets.filter((asset) => !asset.parent);
-        console.log("rendering");
+        
         if (!project) {
             return (<div>Loading...</div>);
         }
@@ -609,13 +608,16 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
             .filter((asset) => !asset.parent);
 
         // Get all root assets from source asset provider
-        const sourceAssets = await this.props.actions.loadAssets(this.props.project);
-
+        
         // Merge and uniquify
-        const rootAssets = _(rootProjectAssets)
-            .concat(sourceAssets)
-            .uniqBy((asset) => asset.id)
-            .value();
+        let rootAssets = rootProjectAssets;
+        if( this.props.project.scanSourceDir ){
+            const sourceAssets = await this.props.actions.loadAssets(this.props.project);
+            rootAssets = _(rootProjectAssets)
+                .concat(sourceAssets)
+                .uniqBy((asset) => asset.id)
+                .value();
+        }
 
         const lastVisited = rootAssets.find((asset) => asset.id === this.props.project.lastVisitedAssetId);
 

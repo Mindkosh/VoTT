@@ -100,6 +100,7 @@ export interface IProject {
     id: string;
     name: string;
     version: string;
+    scanSourceDir: boolean;
     description?: string;
     tags: ITag[];
     sourceConnection: IConnection;

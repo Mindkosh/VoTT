@@ -271,6 +271,7 @@ export default class MockFactory {
             id: `project-${name}`,
             name: `Project ${name}`,
             version: appInfo.version,
+            scanSourceDir: true,
             assets: {},
             exportFormat: MockFactory.exportFormat(),
             sourceConnection: connection,

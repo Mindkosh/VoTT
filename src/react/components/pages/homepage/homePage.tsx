@@ -19,7 +19,6 @@ import {
 import ImportService from "../../../../services/importService";
 import { IAssetMetadata } from "../../../../models/applicationState";
 import { toast } from "react-toastify";
-import MessageBox from "../../common/messageBox/messageBox";
 import { isElectron } from "../../../../common/hostProcess";
 
 export interface IHomePageProps extends RouteComponentProps, React.Props<HomePage> {
