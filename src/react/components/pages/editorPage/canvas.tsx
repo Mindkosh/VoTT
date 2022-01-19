@@ -481,12 +481,13 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
             case 73:
             case 107:
                 newWidth = Math.round( parseFloat( canvas.style.width ) + ( 0.2 * parseFloat( canvas.style.width ) ));
-                newWidth = Math.min( boundingBox.naturalWidth*2, newWidth );
+                newWidth = Math.min( boundingBox.naturalWidth*3, newWidth );
                 newHeight = Math.round( parseFloat( canvas.style.height ) + ( 0.2 * parseFloat( canvas.style.height )) );
-                newHeight = Math.min( boundingBox.naturalHeight*2, newHeight );
+                newHeight = Math.min( boundingBox.naturalHeight*3, newHeight );
 
                 canvas.style.width = `${newWidth}px`;
                 canvas.style.height = `${newHeight}px`;
+
                 this.editor.resize(newWidth, newHeight);
                 break;
             
@@ -500,6 +501,7 @@ export default class Canvas extends React.Component<ICanvasProps, ICanvasState> 
 
                 canvas.style.width = `${newWidth}px`;
                 canvas.style.height = `${newHeight}px`;
+                
                 this.editor.resize(newWidth, newHeight);
                 break;
             

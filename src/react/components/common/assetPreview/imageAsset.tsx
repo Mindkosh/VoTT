@@ -6,7 +6,7 @@ import { IAssetProps } from "./assetPreview";
  */
 export class ImageAsset extends React.Component<IAssetProps> {
     private image: React.RefObject<HTMLImageElement> = React.createRef();
-
+    
     public render() {
         return (
             <img ref={this.image}
